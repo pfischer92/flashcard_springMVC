@@ -40,11 +40,20 @@ public class QuestionnaireController {
 		return "redirect:/questionnaires";
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable String id) {
+		Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
+		if (questionnaire.isPresent()) {
+			questionnaireRepository.delete(questionnaire.get());
+			return "redirect:/questionnaires";
+		} else {
+			return "404";
+		}
+	}
+
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String findAll(Model model) {
-		
-		
 		List<Questionnaire> questionnaires = questionnaireRepository.findAll();
 		
 		model.addAttribute("questionnaires", questionnaires);

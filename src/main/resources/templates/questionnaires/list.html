@@ -27,6 +27,14 @@
 				<td>
 					<div class="btn-group float-right" role="group">
 						<div>
+							<form action="#" th:action="@{/questionnaires} + '/' + ${questionnaire.id}" method="post" >
+								<input type="hidden" name="_method" value="DELETE"/>
+								<button type="submit" class="btn btn-danger">
+									Delete
+								</button>
+							</form>
+						</div>
+						<div>
 							<form action="#" th:action="@{/questionnaires} + '/' + ${questionnaire.id}">
 								<button type="submit" class="btn btn-secondary">
 									Show
