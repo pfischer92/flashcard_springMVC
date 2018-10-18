@@ -26,6 +26,13 @@
 
 				<td>
 					<div class="btn-group float-right" role="group">
+						<a class="btn btn-info" th:href="@{/questionnaires}+ '/' + ${questionnaire.id} + '?form'">
+							Update
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class="btn-group float-right" role="group">
 						<div>
 							<form action="#" th:action="@{/questionnaires} + '/' + ${questionnaire.id}" method="post" >
 								<input type="hidden" name="_method" value="DELETE"/>
@@ -34,6 +41,10 @@
 								</button>
 							</form>
 						</div>
+					</div>
+				</td>
+				<td>
+					<div class="btn-group float-right" role="group">
 						<div>
 							<form action="#" th:action="@{/questionnaires} + '/' + ${questionnaire.id}">
 								<button type="submit" class="btn btn-secondary">
@@ -41,6 +52,7 @@
 								</button>
 							</form>
 						</div>
+					</div>
 				</td>
 			</tr>
 			</tbody>

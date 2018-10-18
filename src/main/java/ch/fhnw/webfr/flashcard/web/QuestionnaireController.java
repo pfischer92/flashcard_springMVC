@@ -40,6 +40,32 @@ public class QuestionnaireController {
 		return "redirect:/questionnaires";
 	}
 
+	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+	public String updateForm(@PathVariable String id, Model model) {
+		Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
+		if (questionnaire.isPresent()){
+			model.addAttribute("questionnaire", questionnaire.get());
+			return "questionnaires/update";
+		} else {
+			return "404";
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(@PathVariable String id, @Valid Questionnaire questionnaire, BindingResult bindingResult,
+						 Model model) {
+		if (bindingResult.hasErrors()) {
+			return "questionnaires/update";
+		}
+		Optional<Questionnaire> oldQuestionnsaire = questionnaireRepository.findById(id);
+		if (oldQuestionnsaire.isPresent()) {
+			oldQuestionnsaire.get().setDescription(questionnaire.getDescription());
+			oldQuestionnsaire.get().setTitle(questionnaire.getTitle());
+			questionnaireRepository.save(oldQuestionnsaire.get());
+		}
+		return "redirect:/questionnaires";
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable String id) {
 		Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
@@ -72,6 +98,5 @@ public class QuestionnaireController {
 		else {
 			return "404";
 		}
-
 	}
 }
