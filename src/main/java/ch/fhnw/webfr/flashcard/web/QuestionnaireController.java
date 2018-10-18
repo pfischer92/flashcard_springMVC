@@ -65,8 +65,13 @@ public class QuestionnaireController {
 	public String findById(@PathVariable String id, Model model) {
 		
 		Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
-		model.addAttribute("questionnaire", questionnaire.get());
-		
-		return "questionnaires/show";
+		if(questionnaire.isPresent()){
+			model.addAttribute("questionnaire", questionnaire.get());
+			return "questionnaires/show";
+		}
+		else {
+			return "404";
+		}
+
 	}
 }
