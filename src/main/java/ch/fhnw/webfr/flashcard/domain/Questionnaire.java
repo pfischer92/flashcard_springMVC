@@ -4,11 +4,17 @@ package ch.fhnw.webfr.flashcard.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Size;
+
 @Document(collection="questionnaires")
 public class Questionnaire {
 	@Id
 	private String id;
+
+	@Size(min = 2, max = 30)
 	private String  title;
+
+	@Size(min = 10, max = 50)
 	private String description;
 
 	public void setId(String id) {
